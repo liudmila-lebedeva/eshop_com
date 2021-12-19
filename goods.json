@@ -1,0 +1,36 @@
+{
+    "1": {
+        "name": "apple",
+        "price": 12,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        "image": "images/2.jpg"
+    },
+
+    "2": {
+        "name": "strawberry",
+        "price": 10,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        "image": "images/1.jpg"
+    },
+
+    "3": {
+        "name": "lemon",
+        "price": 10,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        "image": "images/3.jpg"
+    },
+
+    "4": {
+        "name": "grapes",
+        "price": 14,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        "image": "images/4.jpg"
+    },
+
+    "5": {
+        "name": "kiwi",
+        "price": 8,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        "image": "images/4.jpg"
+    }
+}

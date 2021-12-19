@@ -25,12 +25,5 @@
         "price": 14,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
         "image": "images/4.jpg"
-    },
-
-    "5": {
-        "name": "kiwi",
-        "price": 8,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        "image": "images/4.jpg"
     }
 }

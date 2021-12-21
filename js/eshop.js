@@ -1,39 +1,54 @@
-let cart = {
-    
-};    // bascket
+let cart = {}; //моя корзина
 
-$('document').ready(function() {   //запускает только после загрузки html
+$('document').ready(function () {
     loadGoods();
+    checkCart();
+    showMiniCart();
 });
 
-function loadGoods() {  //выгружаю товары на страницы
-    $.getJSON('goods.json', function(data){
+function loadGoods() {
+    //загружаю товары на страницу
+    $.getJSON('goods.json', function (data) {
         //console.log(data);
-        
         let out = '';
-        for (let key in data){    //перебираем массив
-            
-            out+='<div class="single-goods">';
-            out+='<h3>'+data[key]['name']+'</h3>';
-            out+='<p>Price: '+data[key]['price']+'</p>';
-            out+='<img src="'+data[key].image+'">';
-            out+='<button class="add-to-cart" data="'+key+'">Buy me</button>'; // data"'+key+' -- adding of product key - articul  
-            out+='</div>';
+        for (let key in data) {
+            out += '<div class="single-goods">';
+            out += '<h3>' + data[key]['name'] + '</h3>';
+            out += '<p>Price: ' + data[key]['price'] + '</p>';
+            out += '<img src="' + data[key].image + '">';
+            out += '<button class="add-to-cart" data-pr="' + key + '">Buy</button>';
+            out += '</div>';
         }
         $('#goods').html(out);
         $('button.add-to-cart').on('click', addToCart);
     });
-    
-    
 }
 
-function addToCart() { //add product to the cart
-        let vendorCode = $(this).attr('data'); //this = the button which I click 
-        if (cart[vendorCode] != undefined) {  //if product is in the bascket
-            cart[vendorCode]++;
-        }else {
-            cart[vendorCode] = 1; // if it is not so it is one
-        }
-        
-        console.log(cart);
+function addToCart() {
+    //добавляем товар в корзину
+    let vendorCode = $(this).attr('data-pr');
+    if (cart[vendorCode] != undefined) {
+        cart[vendorCode]++;
+    } else {
+        cart[vendorCode] = 1;
     }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    console.log(cart);
+    showMiniCart();
+}
+
+function checkCart() {
+    //проверяю наличие корзины в localStorage;
+    if (localStorage.getItem('cart') != null) {
+        cart = JSON.parse(localStorage.getItem('cart'));
+    }
+}
+
+function showMiniCart() {
+    //показываю содержимое корзины
+    let out = '';
+    for (let w in cart) {
+        out += w + ' --- ' + cart[w] + '<br>';
+    }
+    $('#mini-cart').html(out);
+}

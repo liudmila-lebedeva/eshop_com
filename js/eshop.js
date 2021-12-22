@@ -44,6 +44,8 @@ function checkCart() {
     }
 }
 
+
+
 function showMiniCart() {
     //показываю содержимое корзины
     let out = '';

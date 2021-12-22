@@ -11,16 +11,45 @@ $.getJSON('goods.json', function (data) {
         //visualisation of the cart
         let out = '';
         for (let key in cart) {
-            out += '<button class="delete">X</button>';
+            out += '<button class="delete" data-pr="' + key + '">X</button>';
             out += '<img src="' + goods[key].image + '" width="48">';
             out += goods[key].name;
-            out += '<button class="minus">-</button>';
+            out += '<button class="minus" data-pr="' + key + '">-</button>';
             out += cart[key];
-            out += '<button class="plus">+</button>';
-            out += cart[key]*goods[key].price; //amount
+            out += '<button class="plus" data-pr="' + key + '">+</button>';
+            out += cart[key] * goods[key].price; //amount
             out += '<br>';
         }
         $('#my-cart').html(out); //на страницу корзины выводим ключи товара
+        $('.plus').on('click', plusGoods);
+        $('.minus').on('click', minusGoods);
+        $('.delete').on('click', deleteGoods);
+    }
+
+    function plusGoods() { //button PLUS
+        let vendorCode = $(this).attr('data-pr');
+        cart[vendorCode]++;
+        showCart();//visualisation of Cart
+        saveCartToLS(); //save the vascket to local storage
+    }
+
+    function minusGoods() { //button PLUS
+        let vendorCode = $(this).attr('data-pr');
+
+        if (cart[vendorCode] > 1) {
+            cart[vendorCode]--;
+        } else {
+            delete cart[vendorCode];
+        }
+        showCart(); //visualisation of Cart
+        saveCartToLS();
+    }
+
+    function deleteGoods() { //button PLUS
+        let vendorCode = $(this).attr('data-pr');
+        delete cart[vendorCode];
+        showCart(); //visualisation of Cart
+        saveCartToLS();
     }
 });
 
@@ -30,4 +59,9 @@ function checkCart() {
         cart = JSON.parse(localStorage.getItem('cart'));
     }
 }
+
+function saveCartToLS() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
 

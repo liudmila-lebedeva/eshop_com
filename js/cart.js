@@ -9,21 +9,27 @@ $.getJSON('goods.json', function (data) {
 
     function showCart() {
         //visualisation of the cart
-        let out = '';
-        for (let key in cart) {
-            out += '<button class="delete" data-pr="' + key + '">X</button>';
-            out += '<img src="' + goods[key].image + '" width="48">';
-            out += goods[key].name;
-            out += '<button class="minus" data-pr="' + key + '">-</button>';
-            out += cart[key];
-            out += '<button class="plus" data-pr="' + key + '">+</button>';
-            out += cart[key] * goods[key].price; //amount
-            out += '<br>';
+        if ($.isEmptyObject(cart)) {
+            //the basket is empty
+            let out = 'Your basket is empty. Do you want to buy something? Click <a href="index.php">here</a>';
+            $('#my-cart').html(out);
+        } else {
+            let out = '';
+            for (let key in cart) {
+                out += '<button class="delete" data-pr="' + key + '">X</button>';
+                out += '<img src="' + goods[key].image + '" width="48">';
+                out += goods[key].name;
+                out += '<button class="minus" data-pr="' + key + '">-</button>';
+                out += cart[key];
+                out += '<button class="plus" data-pr="' + key + '">+</button>';
+                out += cart[key] * goods[key].price; //amount
+                out += '<br>';
+            }
+            $('#my-cart').html(out); //на страницу корзины выводим ключи товара
+            $('.plus').on('click', plusGoods);
+            $('.minus').on('click', minusGoods);
+            $('.delete').on('click', deleteGoods);
         }
-        $('#my-cart').html(out); //на страницу корзины выводим ключи товара
-        $('.plus').on('click', plusGoods);
-        $('.minus').on('click', minusGoods);
-        $('.delete').on('click', deleteGoods);
     }
 
     function plusGoods() { //button PLUS

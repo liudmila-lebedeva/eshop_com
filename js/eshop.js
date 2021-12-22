@@ -52,5 +52,6 @@ function showMiniCart() {
     for (let w in cart) {
         out += w + ' --- ' + cart[w] + '<br>';
     }
+    out += '<br><a href="cart.html">Shopping Basket</a>';
     $('#mini-cart').html(out);
 }

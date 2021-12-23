@@ -7,7 +7,7 @@ $('document').ready(function () {
 });
 
 function loadGoods() {
-    //загружаю товары на страницу
+    //loading products on the page
     $.getJSON('goods.json', function (data) {
         //console.log(data);
         let out = '';
@@ -25,7 +25,7 @@ function loadGoods() {
 }
 
 function addToCart() {
-    //добавляем товар в корзину
+    //add products to our basket
     let vendorCode = $(this).attr('data-pr');
     if (cart[vendorCode] != undefined) {
         cart[vendorCode]++;
@@ -38,7 +38,7 @@ function addToCart() {
 }
 
 function checkCart() {
-    //проверяю наличие корзины в localStorage;
+    //checking id there is the priducts in localStorage;
     if (localStorage.getItem('cart') != null) {
         cart = JSON.parse(localStorage.getItem('cart'));
     }
@@ -47,11 +47,11 @@ function checkCart() {
 
 
 function showMiniCart() {
-    //показываю содержимое корзины
+    //Shopping Basket on main page
     let out = '';
     for (let w in cart) {
         out += w + ' --- ' + cart[w] + '<br>';
     }
-    out += '<br><a href="cart.html">Shopping Basket</a>';
+    out += '<br><a href="cart">Shopping Basket</a>';
     $('#mini-cart').html(out);
 }

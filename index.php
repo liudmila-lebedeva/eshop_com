@@ -1,21 +1,18 @@
-<!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edit this template
--->
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-        <link rel="stylesheet" href="css/style.css">
-    </head>
-    <body>
-        <div id="mini-cart">
-            
-        </div>
-        <div id="goods"></div>
-        
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>    
-    <script src="js/eshop.js"></script>    
-    </body>
-</html>
+<?php
+//this file processes all requests!
+$route = $_GET['route'];
+ 
+require 'templates/header.php';  //loading the header
+
+
+switch ($route) {   //we change only inner part of pages. footer, header are the same 
+    case '':
+        require 'templates/main.php';
+        break;
+    case 'cart':
+        require 'templates/cart.php';
+        break;
+
+}
+
+require 'templates/footer.php'; //then I load the footer
